@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""One Line, One Chill (make.fun).
+"""One Line, One Chill — a make.fun one-line entry."""
 
-Writes the entry to /output/entry.txt, where the sealed scorer reads it.
-"""
+from pathlib import Path
 
-import os
+ENTRY = "The baby monitor crackled at 3 a.m. and whispered my own voice back, asking why I had stopped answering it."
 
-TEXT = "The voicemail from my own number ended with my voice saying, very calmly, 'Don't pick up — I'm still in the house, and so is the other one.'"
+OUTPUT = Path("/output/entry.txt")
 
 
-def main():
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(TEXT)
+def write_entry() -> None:
+    text = ENTRY.strip()
+    assert text, "entry must not be blank"
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(text, encoding="utf-8")
 
 
 if __name__ == "__main__":
-    main()
+    write_entry()
